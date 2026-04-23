@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: E-Com_Template
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/abdelkderboukert/E-Com_Template
+    targetRevision: HEAD
+    path: deploy/oil-gas-platform
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: E-Com_Template
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

@@ -169,6 +169,105 @@ npm start
 
 ---
 
+## 🔄 CI/CD & DevOps
+
+Aurum uses a fully automated GitHub Actions pipeline covering continuous integration, security scanning, and continuous deployment via ArgoCD.
+
+### Workflow Overview
+
+| Workflow | File | Trigger |
+|---|---|---|
+| **CI Pipeline** | `CI.yml` | Push to `main` |
+| **Security Scan & Build** | `Security.yml` | Push / PR to `main`, `development`, `dev-*` · Weekly schedule |
+| **CD — ArgoCD Sync** | `argocd-sync.yml` | After CI pipeline succeeds on `main` or `development` |
+| **Dependabot** | `dependabot.yml` | Every Monday |
+
+---
+
+### CI Pipeline (`CI.yml`)
+
+Runs on every push to `main` and on manual dispatch. Ensures the codebase lints and builds cleanly before anything else runs.
+
+```
+Push to main
+    │
+    ▼
+Frontend Lint (ESLint)
+    │
+    ▼
+Frontend Build (npm run build)
+```
+
+**Jobs:**
+- **`lint-frontend`** — installs dependencies and runs `npm run lint`
+- **`build-frontend`** — depends on lint passing, then runs `npm run build` from the root
+
+---
+
+### Security Scan & Build (`Security.yml`)
+
+Runs on every push and pull request to `main`, `development`, or any `dev-*` branch, plus a weekly scheduled scan every Sunday at 02:00 UTC. All jobs run in parallel except `build-and-scan`, which waits on `secrets-scan` and `code-quality`.
+
+**Jobs:**
+
+| Job | Tools | What it does |
+|---|---|---|
+| `secrets-scan` | TruffleHog · GitLeaks | Scans the full git history for leaked credentials and secrets |
+| `codeql-analysis` | GitHub CodeQL | Static analysis for JS/TS security and quality issues |
+| `dependency-check` | npm audit | Audits all Node.js dependencies for known CVEs |
+| `code-quality` | ESLint · Prettier | Lints source code and checks formatting |
+| `semgrep-analysis` | Semgrep (`p/javascript`, `p/nextjs`) | SAST pattern scanning for common JS/Next.js vulnerabilities |
+| `build-and-scan` | Docker · Trivy · Grype | Builds the Docker image, scans it for OS and package CVEs, then pushes to GHCR on non-PR runs |
+| `security-summary` | — | Aggregates all scan results and prints a final report |
+
+Results from Trivy and Grype are uploaded to the **GitHub Security tab** as SARIF reports. Artifact reports (GitLeaks, npm audit, ESLint, Semgrep) are stored as workflow artifacts for each run.
+
+---
+
+### CD — ArgoCD Sync (`argocd-sync.yml`)
+
+Triggers automatically once the CI pipeline completes successfully on `main` or `development`. Connects to your ArgoCD instance and syncs the application, then waits up to 5 minutes for it to reach a healthy state.
+
+```
+CI Pipeline succeeds (main / development)
+    │
+    ▼
+Install ArgoCD CLI
+    │
+    ▼
+Login to ArgoCD server
+    │
+    ▼
+argocd app sync
+    │
+    ▼
+argocd app wait --health (timeout: 300s)
+```
+
+**Required secrets:**
+
+| Secret | Description |
+|---|---|
+| `ARGOCD_SERVER` | Hostname of your ArgoCD instance |
+| `ARGOCD_USERNAME` | ArgoCD login username |
+| `ARGOCD_PASSWORD` | ArgoCD login password |
+
+---
+
+### Dependabot (`dependabot.yml`)
+
+Keeps dependencies up to date automatically with weekly pull requests every Monday.
+
+| Ecosystem | Directory | PRs limit |
+|---|---|---|
+| `github-actions` | `/` | 3 open PRs max |
+
+> **Note:** The original config also included `pip` (Python) updates — this has been removed as Aurum is a pure Next.js project. Only GitHub Actions versions are auto-updated.
+
+All Dependabot PRs are assigned to `@abdelkderboukert` and labeled `dependencies`.
+
+---
+
 ## 👤 Author
 
 **Abdelkader Boukert**  
