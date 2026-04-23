@@ -1,0 +1,90 @@
+PROPRIETARY SOFTWARE LICENSE
+
+Copyright (c) 2026 Abdelkader Boukert
+Contact: abdelkaderboukart@gmail.com
+
+All rights reserved.
+
+================================================================================
+                        TERMS AND CONDITIONS
+================================================================================
+
+1. DEFINITIONS
+
+   "Software" refers to the Aurum e-commerce platform, including all source
+   code, design assets, configuration files, documentation, and any associated
+   materials contained in this repository.
+
+   "Author" refers to Abdelkader Boukert, the sole copyright holder.
+
+   "Licensee" refers to any individual or legal entity that has obtained a
+   copy of this Software under a valid written agreement with the Author.
+
+   "SaaS Deployment" refers to using this Software to provide a hosted
+   service to third-party clients.
+
+2. GRANT OF LICENSE
+
+   Subject to the terms of this License, the Author grants the Licensee a
+   limited, non-exclusive, non-transferable license to:
+
+   (a) Use and modify this Software for internal purposes;
+   (b) Deploy this Software as a SaaS offering to the Licensee's own clients;
+   (c) Create derivative works for deployment under the Licensee's own brand,
+       provided that authorship attribution to Abdelkader Boukert is preserved
+       in all documentation and README files.
+
+3. RESTRICTIONS
+
+   The Licensee may NOT:
+
+   (a) Redistribute, resell, sublicense, or transfer the Software or any
+       derivative work to any third party without prior written consent from
+       the Author;
+   (b) Publish the source code of this Software, or any substantial portion
+       thereof, publicly (e.g., on GitHub, GitLab, or any public platform)
+       without prior written consent from the Author;
+   (c) Remove or alter any copyright notices, author attributions, or
+       proprietary legends contained in the Software;
+   (d) Claim authorship or original ownership of this Software;
+   (e) Use the Software to compete directly with the Author's own commercial
+       offerings of the same product without a separate commercial agreement.
+
+4. INTELLECTUAL PROPERTY
+
+   The Software and all copies thereof are proprietary to the Author and
+   title thereto remains in the Author at all times. All rights in the
+   Software not specifically granted in this License are reserved to the
+   Author.
+
+5. NO WARRANTY
+
+   THIS SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+   OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. THE AUTHOR SHALL
+   NOT BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM,
+   OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR ITS USE.
+
+6. TERMINATION
+
+   This License is effective until terminated. It will terminate automatically
+   if the Licensee fails to comply with any of its terms. Upon termination,
+   the Licensee must destroy all copies of the Software in their possession.
+
+7. GOVERNING LAW
+
+   This License shall be governed by and construed in accordance with the
+   laws of Algeria. Any disputes arising from this License shall be subject
+   to the exclusive jurisdiction of the courts of Algeria.
+
+8. CONTACT
+
+   For licensing inquiries, commercial agreements, or permissions beyond the
+   scope of this License, please contact:
+
+   Abdelkader Boukert
+   Email: abdelkaderboukart@gmail.com
+
+================================================================================
+          Copyright (c) 2026 Abdelkader Boukert. All rights reserved.
+================================================================================

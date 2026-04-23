@@ -1,0 +1,495 @@
+[
+  {
+    "id": 1,
+    "name": "Linen Oversized Shirt",
+    "price": 12800,
+    "tag": "New",
+    "tagColor": "#2a6b4a",
+    "img": "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=900&q=85",
+      "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=900&q=85",
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=900&q=85"
+    ],
+    "category": "Tops",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Ivoire",
+        "hex": "#f5f0e8"
+      },
+      {
+        "name": "Sable",
+        "hex": "#c9b49a"
+      },
+      {
+        "name": "Ardoise",
+        "hex": "#8a9aaa"
+      }
+    ],
+    "description": "Une chemise surdimensionnée en lin pur, coupée avec soin pour une allure décontractée mais sophistiquée. Parfaite pour toutes les saisons grâce à la respirabilité naturelle du lin.",
+    "material": "100% Lin certifié OEKO-TEX",
+    "rating": 4.8,
+    "reviewCount": 124,
+    "inStock": true
+  },
+  {
+    "id": 2,
+    "name": "Wide Leg Trousers",
+    "price": 9600,
+    "tag": "Bestseller",
+    "tagColor": "#7a4a1a",
+    "img": "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=900&q=85",
+      "https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?w=900&q=85",
+      "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?w=900&q=85"
+    ],
+    "category": "Bottoms",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Camel",
+        "hex": "#c19a6b"
+      },
+      {
+        "name": "Noir",
+        "hex": "#2a2318"
+      },
+      {
+        "name": "Crème",
+        "hex": "#f0ebe0"
+      }
+    ],
+    "description": "Un pantalon à jambe large d'une coupe impeccable, en crêpe de viscose fluidifié. La taille haute galbe la silhouette tandis que le tombé généreux crée une ligne élégante.",
+    "material": "68% Viscose, 32% Polyester",
+    "rating": 4.9,
+    "reviewCount": 218,
+    "inStock": true
+  },
+  {
+    "id": 3,
+    "name": "Minimal Knit Dress",
+    "price": 15400,
+    "tag": "Limited",
+    "tagColor": "#6b3a5a",
+    "img": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&q=85",
+      "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=900&q=85",
+      "https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?w=900&q=85"
+    ],
+    "category": "Dresses",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Écru",
+        "hex": "#f2ede4"
+      },
+      {
+        "name": "Moka",
+        "hex": "#7a5c3a"
+      }
+    ],
+    "description": "Une robe en maille à la coupe minimaliste et au tombé naturel. Conçue pour s'adapter à chaque morphologie, elle allie confort et sophistication avec une élégance intemporelle.",
+    "material": "80% Coton peigné, 20% Cachemire",
+    "rating": 4.7,
+    "reviewCount": 89,
+    "inStock": true
+  },
+  {
+    "id": 4,
+    "name": "Silk Wrap Blazer",
+    "price": 21800,
+    "tag": "Featured",
+    "tagColor": "#2a4a6b",
+    "img": "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509631179647-0177331693ae?w=900&q=85",
+      "https://images.unsplash.com/photo-1551803091-e20673f15770?w=900&q=85",
+      "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=900&q=85"
+    ],
+    "category": "Outerwear",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Ivoire",
+        "hex": "#f5f0e8"
+      },
+      {
+        "name": "Camel",
+        "hex": "#c19a6b"
+      },
+      {
+        "name": "Noir",
+        "hex": "#2a2318"
+      }
+    ],
+    "description": "Un blazer enveloppant en soie naturelle, structuré mais souple. Son col châle et sa ceinture croisée définissent la silhouette avec autorité.",
+    "material": "100% Soie naturelle Mulberry",
+    "rating": 4.9,
+    "reviewCount": 67,
+    "inStock": true
+  },
+  {
+    "id": 5,
+    "name": "Cashmere Turtleneck",
+    "price": 18200,
+    "tag": "New",
+    "tagColor": "#2a6b4a",
+    "img": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=900&q=85",
+      "https://images.unsplash.com/photo-1600861195091-690c92f1d2cc?w=900&q=85",
+      "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=900&q=85"
+    ],
+    "category": "Tops",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Crème",
+        "hex": "#f0ebe0"
+      },
+      {
+        "name": "Grège",
+        "hex": "#b5a898"
+      },
+      {
+        "name": "Charbon",
+        "hex": "#3a3530"
+      }
+    ],
+    "description": "Un col roulé en cachemire grade A d'une douceur incomparable.",
+    "material": "100% Cachemire Grade A Mongolie",
+    "rating": 4.8,
+    "reviewCount": 143,
+    "inStock": true
+  },
+  {
+    "id": 6,
+    "name": "Tailored Midi Skirt",
+    "price": 8900,
+    "originalPrice": 12400,
+    "tag": "Sale",
+    "tagColor": "#8a2a2a",
+    "img": "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=900&q=85",
+      "https://images.unsplash.com/photo-1617922001439-4a2e6562f328?w=900&q=85",
+      "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=900&q=85"
+    ],
+    "category": "Bottoms",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Sable",
+        "hex": "#c9b49a"
+      },
+      {
+        "name": "Ardoise",
+        "hex": "#8a9aaa"
+      }
+    ],
+    "description": "Une jupe midi tailleur à la coupe droite et précise.",
+    "material": "55% Laine vierge, 45% Polyester",
+    "rating": 4.6,
+    "reviewCount": 95,
+    "inStock": true
+  },
+  {
+    "id": 7,
+    "name": "Draped Shoulder Top",
+    "price": 11200,
+    "tag": "New",
+    "tagColor": "#2a6b4a",
+    "img": "https://images.unsplash.com/photo-1554568218-0f1715e72254?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1554568218-0f1715e72254?w=900&q=85",
+      "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=900&q=85",
+      "https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?w=900&q=85"
+    ],
+    "category": "Tops",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Ivoire",
+        "hex": "#f5f0e8"
+      },
+      {
+        "name": "Terracotta",
+        "hex": "#c4714a"
+      }
+    ],
+    "description": "Un top drapé à l'épaule asymétrique.",
+    "material": "100% Crêpe de soie",
+    "rating": 4.7,
+    "reviewCount": 56,
+    "inStock": true
+  },
+  {
+    "id": 8,
+    "name": "Relaxed Linen Trousers",
+    "price": 10400,
+    "tag": "Bestseller",
+    "tagColor": "#7a4a1a",
+    "img": "https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1509551388413-e18d0ac5d495?w=900&q=85",
+      "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=900&q=85",
+      "https://images.unsplash.com/photo-1506629082955-511b1aa562c8?w=900&q=85"
+    ],
+    "category": "Bottoms",
+    "sizes": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Naturel",
+        "hex": "#e8dcc8"
+      },
+      {
+        "name": "Kaki",
+        "hex": "#8a8a6a"
+      },
+      {
+        "name": "Ardoise",
+        "hex": "#8a9aaa"
+      }
+    ],
+    "description": "Un pantalon en lin décontracté à la coupe détendue.",
+    "material": "100% Lin lavé certifié",
+    "rating": 4.8,
+    "reviewCount": 187,
+    "inStock": true
+  },
+  {
+    "id": 9,
+    "name": "Structured Wool Coat",
+    "price": 34500,
+    "tag": "Limited",
+    "tagColor": "#6b3a5a",
+    "img": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=900&q=85",
+      "https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=900&q=85",
+      "https://images.unsplash.com/photo-1551803091-e20673f15770?w=900&q=85"
+    ],
+    "category": "Outerwear",
+    "sizes": [
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Camel",
+        "hex": "#c19a6b"
+      },
+      {
+        "name": "Charbon",
+        "hex": "#3a3530"
+      }
+    ],
+    "description": "Un manteau structuré en laine bouillie d'une coupe impeccable.",
+    "material": "90% Laine vierge, 10% Cachemire",
+    "rating": 5,
+    "reviewCount": 42,
+    "inStock": true
+  },
+  {
+    "id": 10,
+    "name": "Slip Midi Dress",
+    "price": 13600,
+    "tag": "New",
+    "tagColor": "#2a6b4a",
+    "img": "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=900&q=85",
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=900&q=85",
+      "https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?w=900&q=85"
+    ],
+    "category": "Dresses",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Ivoire",
+        "hex": "#f5f0e8"
+      },
+      {
+        "name": "Moka",
+        "hex": "#7a5c3a"
+      },
+      {
+        "name": "Corail",
+        "hex": "#c4714a"
+      }
+    ],
+    "description": "Une robe nuisette mi-longue en satin.",
+    "material": "100% Satin de viscose",
+    "rating": 4.6,
+    "reviewCount": 104,
+    "inStock": true
+  },
+  {
+    "id": 11,
+    "name": "Merino Wrap Cardigan",
+    "price": 16800,
+    "tag": "Bestseller",
+    "tagColor": "#7a4a1a",
+    "img": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=900&q=85",
+      "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=900&q=85",
+      "https://images.unsplash.com/photo-1600861195091-690c92f1d2cc?w=900&q=85"
+    ],
+    "category": "Tops",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "colors": [
+      {
+        "name": "Crème",
+        "hex": "#f0ebe0"
+      },
+      {
+        "name": "Sable",
+        "hex": "#c9b49a"
+      },
+      {
+        "name": "Charbon",
+        "hex": "#3a3530"
+      }
+    ],
+    "description": "Un cardigan croisé en mérinos extra-fin.",
+    "material": "100% Laine Mérinos Extrafine",
+    "rating": 4.9,
+    "reviewCount": 162,
+    "inStock": true
+  },
+  {
+    "id": 12,
+    "name": "Pleated Maxi Skirt",
+    "price": 11800,
+    "tag": "Featured",
+    "tagColor": "#2a4a6b",
+    "img": "https://images.unsplash.com/photo-1617922001439-4a2e6562f328?w=700&q=85",
+    "images": [
+      "https://images.unsplash.com/photo-1617922001439-4a2e6562f328?w=900&q=85",
+      "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=900&q=85",
+      "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=900&q=85"
+    ],
+    "category": "Bottoms",
+    "sizes": [
+      "XS",
+      "S",
+      "M",
+      "L"
+    ],
+    "colors": [
+      {
+        "name": "Écru",
+        "hex": "#f2ede4"
+      },
+      {
+        "name": "Terracotta",
+        "hex": "#c4714a"
+      },
+      {
+        "name": "Ardoise",
+        "hex": "#8a9aaa"
+      }
+    ],
+    "description": "Une jupe maxi plissée au volume généreux.",
+    "material": "100% Georgette de soie",
+    "rating": 4.7,
+    "reviewCount": 78,
+    "inStock": true
+  },
+  {
+    "name": "test",
+    "price": 10,
+    "originalPrice": 0,
+    "tag": "Nouveau",
+    "tagColor": "#9900ff",
+    "img": "/api/image?id=1oZno_w9FVn-iaJlGFbEEVnj_OLm0a4s5",
+    "images": [
+      "/api/image?id=1oZno_w9FVn-iaJlGFbEEVnj_OLm0a4s5",
+      "/api/image?id=1oZno_w9FVn-iaJlGFbEEVnj_OLm0a4s5",
+      "/api/image?id=1oZno_w9FVn-iaJlGFbEEVnj_OLm0a4s5"
+    ],
+    "category": "Tops",
+    "sizes": [
+      "38",
+      "39",
+      "40",
+      "41",
+      "42"
+    ],
+    "colors": [
+      {
+        "name": "test1",
+        "hex": "#2d133e"
+      },
+      {
+        "name": "jokaka",
+        "hex": "#e38716"
+      }
+    ],
+    "description": "bla nla ",
+    "material": "tefs",
+    "inStock": true,
+    "rating": 5,
+    "reviewCount": 0,
+    "id": 13
+  }
+]
