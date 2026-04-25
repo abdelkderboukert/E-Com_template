@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import type { CartItem, CheckoutStep } from "@/lib/data";
-import { fmt, WILAYAS } from "@/lib/data";
+import { fmt, COUNTRIES } from "@/lib/data";
+import { t } from "@/lib/i18n";
 
 // ─── Store Links ─────────────────────────────────────────────────────────────
 const STORE_WHATSAPP = "213656906049";
@@ -16,7 +17,7 @@ type Props = {
 };
 
 type DeliveryForm = {
-  name: string; phone: string; wilaya: string; address: string; notes: string;
+  name: string; phone: string; country: string; state: string; address: string; notes: string;
 };
 
 type PayMethod = "whatsapp" | "dahabia" | "instagram" | null;
@@ -45,11 +46,12 @@ function buildWhatsAppMessage(cart: CartItem[], form: DeliveryForm, subtotal: nu
   lines.push(`💵 *Total à régler : ${fmt(total)}*`);
   lines.push("─────────────────────────");
   lines.push("🚚 *Livraison :*");
-  lines.push(`  Nom : ${form.name}`);
-  lines.push(`  Tél : ${form.phone}`);
-  lines.push(`  Wilaya : ${form.wilaya}`);
-  lines.push(`  Adresse : ${form.address}`);
-  if (form.notes) lines.push(`  Notes : ${form.notes}`);
+  lines.push(`  ${t("fullName")} : ${form.name}`);
+  lines.push(`  ${t("phone")} : ${form.phone}`);
+  lines.push(`  ${t("country")} : ${form.country}`);
+  if (form.state) lines.push(`  ${t("state")} : ${form.state}`);
+  lines.push(`  ${t("address")} : ${form.address}`);
+  if (form.notes) lines.push(`  ${t("notes")} : ${form.notes}`);
   lines.push("─────────────────────────");
   lines.push("💬 *Mode de paiement : WhatsApp (à confirmer)*");
   return encodeURIComponent(lines.join("\n"));
@@ -62,12 +64,16 @@ function openWhatsApp(message: string) {
 // ─── Main Modal ───────────────────────────────────────────────────────────────
 export default function CheckoutModal({ open, cart, onClose, onSuccess }: Props) {
   const [step, setStep]         = useState<CheckoutStep | "choose">("recap");
-  const [form, setForm]         = useState<DeliveryForm>({ name: "", phone: "", wilaya: "", address: "", notes: "" });
+  const [form, setForm]         = useState<DeliveryForm>({ name: "", phone: "", country: "", state: "", address: "", notes: "" });
   const [payMethod, setPayMethod] = useState<PayMethod>(null);
   const [loadingCheckout, setLoadingCheckout] = useState(false);
   const [error, setError]       = useState("");
   const [paymentsEnabled, setPaymentsEnabled] = useState({ whatsapp: true, dahabia: true, instagram: true });
   const [deliveryPrices, setDeliveryPrices]   = useState<Record<string, number>>({});
+
+  // ── Dynamic states from CountriesNow API ──
+  const [states, setStates]         = useState<string[]>([]);
+  const [loadingStates, setLoadingStates] = useState(false);
 
   useEffect(() => {
     if (open) {
@@ -87,8 +93,28 @@ export default function CheckoutModal({ open, cart, onClose, onSuccess }: Props)
     }
   }, [open]);
 
+  // Fetch states whenever country changes
+  useEffect(() => {
+    if (!form.country) {
+      setStates([]);
+      return;
+    }
+    setLoadingStates(true);
+    setForm(p => ({ ...p, state: "" }));
+    fetch("/api/states", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ country: form.country }),
+    })
+      .then(r => r.json())
+      .then(d => setStates(d.states ?? []))
+      .catch(() => setStates([]))
+      .finally(() => setLoadingStates(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.country]);
+
   const subtotal    = cart.reduce((s, i) => s + i.price * i.qty, 0);
-  const baseDeliveryFee = form.wilaya && deliveryPrices[form.wilaya] !== undefined ? deliveryPrices[form.wilaya] : 0;
+  const baseDeliveryFee = form.country && deliveryPrices[form.country] !== undefined ? deliveryPrices[form.country] : 0;
   const deliveryFee = subtotal >= 15000 ? 0 : baseDeliveryFee;
   const total       = subtotal + deliveryFee;
   
@@ -99,18 +125,15 @@ export default function CheckoutModal({ open, cart, onClose, onSuccess }: Props)
     setTimeout(() => {
       setStep("recap");
       setPayMethod(null);
-      setForm({ name: "", phone: "", wilaya: "", address: "", notes: "" });
+      setForm({ name: "", phone: "", country: "", state: "", address: "", notes: "" });
       setError("");
+      setStates([]);
     }, 300);
   }
 
   function handleDeliveryNext() {
-    if (!form.name.trim() || !form.phone.trim() || !form.wilaya || !form.address.trim()) {
-      setError("Veuillez remplir tous les champs obligatoires.");
-      return;
-    }
-    if (!/^(05|06|07)\d{8}$/.test(form.phone.replace(/\s/g, ""))) {
-      setError("Numéro de téléphone algérien invalide (ex: 0555 123 456).");
+    if (!form.name.trim() || !form.phone.trim() || !form.country || !form.address.trim()) {
+      setError(t("requiredFieldsError"));
       return;
     }
     setError(""); setStep("choose");
@@ -292,18 +315,18 @@ export default function CheckoutModal({ open, cart, onClose, onSuccess }: Props)
           {step === "delivery" && (
             <>
               <div>
-                <p className="font-display text-xl font-semibold mb-1" style={{ color: "#2a2318" }}>Informations de livraison</p>
-                <p className="text-xs" style={{ color: "#8a7355" }}>Livraison dans toutes les wilayas d'Algérie</p>
+                <p className="font-display text-xl font-semibold mb-1" style={{ color: "#2a2318" }}>{t("checkoutTitle")}</p>
+                <p className="text-xs" style={{ color: "#8a7355" }}>{t("checkoutSubtitle")}</p>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div className="col-span-2 flex flex-col gap-1.5">
                   <label className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8a7355" }}>
-                    Nom complet <span style={{ color: "#c0392b" }}>*</span>
+                    {t("fullName")} <span style={{ color: "#c0392b" }}>*</span>
                   </label>
                   <input
                     type="text"
-                    placeholder="Ahmed Benali"
+                    placeholder={t("placeholderName")}
                     value={form.name}
                     onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                     className="px-4 py-2.5 text-sm outline-none transition-all"
@@ -319,11 +342,11 @@ export default function CheckoutModal({ open, cart, onClose, onSuccess }: Props)
 
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8a7355" }}>
-                    Téléphone <span style={{ color: "#c0392b" }}>*</span>
+                    {t("phone")} <span style={{ color: "#c0392b" }}>*</span>
                   </label>
                   <input
                     type="tel"
-                    placeholder="0555 123 456"
+                    placeholder={t("placeholderPhone")}
                     value={form.phone}
                     onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
                     className="px-4 py-2.5 text-sm outline-none"
@@ -335,26 +358,62 @@ export default function CheckoutModal({ open, cart, onClose, onSuccess }: Props)
 
                 <div className="flex flex-col gap-1.5">
                   <label className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8a7355" }}>
-                    Wilaya <span style={{ color: "#c0392b" }}>*</span>
+                    {t("country")} <span style={{ color: "#c0392b" }}>*</span>
                   </label>
                   <select
-                    value={form.wilaya}
-                    onChange={e => setForm(p => ({ ...p, wilaya: e.target.value }))}
+                    value={form.country}
+                    onChange={e => setForm(p => ({ ...p, country: e.target.value }))}
                     className="px-3 py-2.5 text-sm outline-none"
-                    style={{ border: "0.5px solid #d4c5b0", background: "oklch(0.962 0.059 95.617)", color: form.wilaya ? "#2a2318" : "#8a7355" }}
+                    style={{ border: "0.5px solid #d4c5b0", background: "oklch(0.962 0.059 95.617)", color: form.country ? "#2a2318" : "#8a7355" }}
                   >
-                    <option value="">Choisir...</option>
-                    {WILAYAS.map(w => <option key={w} value={w}>{w}</option>)}
+                    <option value="">{t("selectCountry")}</option>
+                    {COUNTRIES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
                 </div>
 
+                {/* Dynamic State/Province dropdown — from CountriesNow API */}
+                {form.country && (
+                  <div className="col-span-2 flex flex-col gap-1.5">
+                    <label className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8a7355" }}>
+                      {t("state")}
+                    </label>
+                    {loadingStates ? (
+                      <div className="flex items-center gap-2 px-3 py-2.5" style={{ border: "0.5px solid #d4c5b0", background: "oklch(0.962 0.059 95.617)" }}>
+                        <div className="w-3 h-3 border border-t-transparent rounded-full animate-spin" style={{ borderColor: "#8a7355", borderTopColor: "transparent" }} />
+                        <span className="text-xs" style={{ color: "#8a7355" }}>Loading...</span>
+                      </div>
+                    ) : states.length > 0 ? (
+                      <select
+                        value={form.state}
+                        onChange={e => setForm(p => ({ ...p, state: e.target.value }))}
+                        className="px-3 py-2.5 text-sm outline-none"
+                        style={{ border: "0.5px solid #d4c5b0", background: "oklch(0.962 0.059 95.617)", color: form.state ? "#2a2318" : "#8a7355" }}
+                      >
+                        <option value="">{t("selectState")}</option>
+                        {states.map(s => <option key={s} value={s}>{s}</option>)}
+                      </select>
+                    ) : (
+                      <input
+                        type="text"
+                        placeholder={t("state")}
+                        value={form.state}
+                        onChange={e => setForm(p => ({ ...p, state: e.target.value }))}
+                        className="px-4 py-2.5 text-sm outline-none"
+                        style={{ border: "0.5px solid #d4c5b0", background: "oklch(0.962 0.059 95.617)", color: "#2a2318" }}
+                        onFocus={e => e.target.style.borderColor = "#8a7355"}
+                        onBlur={e => e.target.style.borderColor = "#d4c5b0"}
+                      />
+                    )}
+                  </div>
+                )}
+
                 <div className="col-span-2 flex flex-col gap-1.5">
                   <label className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8a7355" }}>
-                    Adresse complète <span style={{ color: "#c0392b" }}>*</span>
+                    {t("address")} <span style={{ color: "#c0392b" }}>*</span>
                   </label>
                   <input
                     type="text"
-                    placeholder="Rue Didouche Mourad, Alger Centre"
+                    placeholder={t("placeholderAddress")}
                     value={form.address}
                     onChange={e => setForm(p => ({ ...p, address: e.target.value }))}
                     className="px-4 py-2.5 text-sm outline-none"
@@ -366,10 +425,10 @@ export default function CheckoutModal({ open, cart, onClose, onSuccess }: Props)
 
                 <div className="col-span-2 flex flex-col gap-1.5">
                   <label className="text-[10px] tracking-[0.2em] uppercase" style={{ color: "#8a7355" }}>
-                    Notes (optionnel)
+                    {t("notes")}
                   </label>
                   <textarea
-                    placeholder="Instructions de livraison particulières..."
+                    placeholder="..."
                     value={form.notes}
                     onChange={e => setForm(p => ({ ...p, notes: e.target.value }))}
                     rows={2}
@@ -519,13 +578,13 @@ export default function CheckoutModal({ open, cart, onClose, onSuccess }: Props)
 
               <div className="flex flex-col gap-1 px-4 py-3" style={{ background: "oklch(0.962 0.059 95.617)", border: "0.5px solid #d4c5b0" }}>
                 <div className="flex justify-between items-center text-xs" style={{ color: "#6b5b47" }}>
-                  <span>Sous-total</span>
+                  <span>{t("subtotal")}</span>
                   <span>{fmt(subtotal)}</span>
                 </div>
-                {form.wilaya && (
+                {form.country && (
                   <div className="flex justify-between items-center text-xs" style={{ color: "#6b5b47" }}>
-                    <span>Livraison ({form.wilaya})</span>
-                    <span>{deliveryFee === 0 ? "Gratuite" : fmt(deliveryFee)}</span>
+                    <span>{t("deliveryFee")} ({form.country})</span>
+                    <span>{deliveryFee === 0 ? t("free") : fmt(deliveryFee)}</span>
                   </div>
                 )}
                 <div
@@ -583,7 +642,7 @@ export default function CheckoutModal({ open, cart, onClose, onSuccess }: Props)
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a7355" strokeWidth="1.5">
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" />
                     </svg>
-                    <p className="text-xs" style={{ color: "#2a2318" }}>{form.address}, {form.wilaya}</p>
+                    <p className="text-xs" style={{ color: "#2a2318" }}>{form.address}{form.state ? `, ${form.state}` : ""}, {form.country}</p>
                   </div>
                   <div className="flex items-center gap-2">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#8a7355" strokeWidth="1.5">

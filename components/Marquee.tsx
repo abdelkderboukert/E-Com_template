@@ -1,14 +1,12 @@
-const ITEMS = [
-  "Livraison gratuite dès 15 000 DZD",
-  "Paiement sécurisé Dahabia",
-  "Fibres naturelles certifiées",
-  "Livraison dans les 58 wilayas",
-  "Retours sous 14 jours",
-  "Nouveautés chaque semaine",
-];
+import { t } from "@/lib/i18n";
 
 export default function Marquee() {
-  const doubled = [...ITEMS, ...ITEMS];
+  const ITEMS = [
+    t("marquee1"),
+    t("marquee2"),
+    t("marquee3"),
+  ];
+  const doubled = [...ITEMS, ...ITEMS, ...ITEMS, ...ITEMS];
 
   return (
     <div

@@ -50,8 +50,8 @@ export default function Footer() {
             Aurum
           </span>
           <p className="text-xs leading-[1.9] max-w-xs" style={{ color: "#6b5b47" }}>
-            Mode éthique et raffinée, conçue pour durer. Livraison dans toutes 
-            les wilayas d'Algérie. Paiement accepté via Dahabia.
+            Ethical and refined fashion, made to last. Worldwide shipping
+            available. Secure payments accepted.
           </p>
           <div className="flex gap-4 mt-1">
             {["Instagram", "TikTok", "Pinterest"].map(s => (

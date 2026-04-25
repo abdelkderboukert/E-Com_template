@@ -45,6 +45,7 @@ function Sidebar({
   toggleTag: (t: string) => void;
   productCount: number;
   mobileOpen: boolean;
+  onCloseMobile: () => void;
   isMobileDrawer?: boolean;
 }) {
   const { products: PRODUCTS } = useProducts();

@@ -27,7 +27,7 @@ export async function POST(req: Request) {
     }
 
     try {
-      if (!verifySignature(rawBody, signature, API_SECRET_KEY)) {
+      if (!verifySignature(Buffer.from(rawBody, "utf-8"), signature, API_SECRET_KEY)) {
         console.error("Webhook Error: Invalid Signature");
         return NextResponse.json({ error: "Forbidden" }, { status: 403 });
       }

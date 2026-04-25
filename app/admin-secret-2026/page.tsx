@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useProducts } from "@/lib/ProductsContext";
 import type { Product } from "@/lib/data";
-import { WILAYAS } from "@/lib/data";
+import { COUNTRIES, fmt } from "@/lib/data";
+import { currencySymbol } from "@/lib/i18n";
 import AdminProductModal from "@/components/AdminProductModal";
 import Navbar from "@/components/Navbar";
 
@@ -18,7 +19,7 @@ type Order = {
   paymentMethod: "dahabia";
   cardLast4: string;
   total: number;
-  delivery: { name: string; phone: string; wilaya: string; address: string; notes?: string };
+  delivery: { name: string; phone: string; country: string; state?: string; address: string; notes?: string };
   items: { id: number; name: string; size: string; color: string; qty: number; price: number }[];
 };
 
@@ -63,7 +64,7 @@ function SettingsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
   const [deliveryPrices, setDeliveryPrices]   = useState<Record<string, number>>({});
   const [loadingDel, setLoadingDel]           = useState(false);
   const [successDel, setSuccessDel]           = useState("");
-  const [searchWilaya, setSearchWilaya]       = useState("");
+  const [searchCountry, setSearchCountry]       = useState("");
 
   useEffect(() => {
     if (isOpen) {
@@ -253,25 +254,25 @@ function SettingsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
         {activeTab === "delivery" && (
           <form onSubmit={handleDeliverySubmit} className="flex flex-col min-h-0 flex-1">
             <p className="text-xs mb-3 font-medium shrink-0" style={{ color: "#8a7355" }}>
-              Définissez les tarifs de livraison par wilaya (0 = Gratuit).
+              Set delivery prices per country (0 = Free).
               <br />
-              La livraison devient automatiquement gratuite dès 15 000 DZD d'achats.
+              Delivery becomes automatically free above {fmt(15000)}.
             </p>
             
             <input
               type="text"
-              placeholder="Rechercher une wilaya..."
-              value={searchWilaya}
-              onChange={e => setSearchWilaya(e.target.value)}
+              placeholder="Search country..."
+              value={searchCountry}
+              onChange={e => setSearchCountry(e.target.value)}
               className="w-full px-4 py-2 mb-3 text-xs outline-none shrink-0"
               style={{ border: "0.5px solid #d4c5b0", background: "oklch(0.962 0.059 95.617)", color: "#2a2318" }}
             />
 
             <div className="flex-1 overflow-y-auto min-h-0 flex flex-col gap-1 pr-1.5 custom-scrollbar" style={{ overscrollBehavior: "contain" }}>
-              {WILAYAS.filter(w => w.toLowerCase().includes(searchWilaya.toLowerCase())).map((w, idx) => (
+              {COUNTRIES.filter(w => w.toLowerCase().includes(searchCountry.toLowerCase())).map((w, idx) => (
                 <div key={w} className="flex items-center justify-between p-2.5 transition-all" style={{ borderBottom: "0.5px solid #e8ddd0" }}>
                   <p className="text-xs font-medium" style={{ color: "#2a2318" }}>
-                    <span className="opacity-50 mr-2 w-4 inline-block text-right">{WILAYAS.indexOf(w)+1}.</span>
+                    <span className="opacity-50 mr-2 w-4 inline-block text-right">{COUNTRIES.indexOf(w)+1}.</span>
                     {w}
                   </p>
                   <div className="flex items-center gap-2">
@@ -285,7 +286,7 @@ function SettingsModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => vo
                       className="w-20 px-2 py-1.5 text-xs text-right outline-none"
                       style={{ border: "0.5px solid #d4c5b0", background: "oklch(0.987 0.022 95.277)" }}
                     />
-                    <span className="text-[10px] font-medium" style={{ color: "#8a7355" }}>DZD</span>
+                    <span className="text-[10px] font-medium" style={{ color: "#8a7355" }}>{currencySymbol}</span>
                   </div>
                 </div>
               ))}
@@ -498,7 +499,7 @@ function OrdersSection() {
                 <div className="flex flex-col gap-1 text-xs" style={{ color: "#2a2318" }}>
                   <p className="font-medium">{order.delivery.name}</p>
                   <p style={{ color: "#6b5b47" }}>{order.delivery.phone}</p>
-                  <p style={{ color: "#6b5b47" }}>{order.delivery.address}, {order.delivery.wilaya}</p>
+                  <p style={{ color: "#6b5b47" }}>{order.delivery.address}{order.delivery.state ? `, ${order.delivery.state}` : ""}, {order.delivery.country}</p>
                   {order.delivery.notes && <p className="italic" style={{ color: "#b5a898" }}>"{order.delivery.notes}"</p>}
                 </div>
               </div>
